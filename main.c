@@ -6,11 +6,6 @@ int main(int argc, char ** argv){
 	while( 'q' != (response = getchar())){
 
 
-
-
-
-
-
 	}
 	return 0;
 }
