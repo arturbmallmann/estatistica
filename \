@@ -4,7 +4,6 @@
 int main(int argc, char ** argv){
 	int tam, i;
 	char response;
-	double media;
 	while( 'q' != (response = getchar())){
 			printf("Digite quantos dados são:");
 			scanf("%d", &tam);
@@ -15,15 +14,11 @@ int main(int argc, char ** argv){
 					scanf("%ls", &dados[i]);
 					dtotal += dados[i];
 				}
-
-				media = dtotal/tam;
-				printf("a media eh %.2ls", media);
-				
 				for(i=0;i<tam;i++){
-					int valor = dados[i]-media;
+					int valor = total[i]-media;
 					dpadrao = valor*valor;
 				}
-				printf("variancia: %.2ls", sqrt(dpadrao/tam));
+				printf("variancia: %d",sqrt(dpadrao/tam));
 			}
 	return 0;
 }
