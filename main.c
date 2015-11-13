@@ -5,7 +5,7 @@ int main(int argc, char ** argv){
 	char response;
 	double media, dpadrao = 0, dtotal = 0, cv;
 	while( 'q' != (response = getchar())){
-			printf("Digite quantos dados são:");
+			printf("Digite quantos dados são:\n");
 			scanf("%d", &tam);
 
 			double dados[tam], dtotal,dpadrao;
@@ -16,15 +16,15 @@ int main(int argc, char ** argv){
 				}
 
 				media = dtotal/tam;
-				printf("Media: %.2ls", media);
+				printf("Media: %.2ls\n", media);
 				
 				for(i=0;i<tam;i++){
 					int valor = dados[i]-media;
 					dpadrao += valor*valor;
 				}
-				printf("Desvio padrao: %.2ls", sqrt(dpadrao/tam));
+				printf("Desvio padrao: %.2ls\n", sqrt(dpadrao/tam));
 				cv = (sqrt(dpadrao/tam)/media)*100;
-				printf("Coeficiente de variaçao: %.2ls\%", cv);
+				printf("Coeficiente de variaçao: %.2ls %\n", cv);
 				
 			}
 
