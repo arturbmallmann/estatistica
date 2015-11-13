@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<math.h>
-
 int main(int argc, char ** argv){
 	int tam, i;
 	char response;
@@ -25,5 +24,9 @@ int main(int argc, char ** argv){
 				}
 				printf("variancia: %.2ls", sqrt(dpadrao/tam));
 			}
+				media = dtotal/tam;
+				printf("a media eh %ls", media);
+				
+			
 	return 0;
 }
