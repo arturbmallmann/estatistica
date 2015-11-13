@@ -24,7 +24,7 @@ int main(int argc, char ** argv){
 				}
 				printf("Desvio padrao: %.2ls", sqrt(dpadrao/tam));
 				cv = (sqrt(dpadrao/tam)/media)*100;
-				printf("Coeficiente de variaçao: %.2ls", cv);
+				printf("Coeficiente de variaçao: %.2ls%", cv);
 				
 			}
 
