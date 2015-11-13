@@ -1,8 +1,9 @@
 #include<stdio.h>
-
+#include<math.h>
 int main(int argc, char ** argv){
 	int tam, i;
 	char response;
+	double media;
 	while( 'q' != (response = getchar())){
 			printf("Digite quantos dados são:");
 			scanf("%d", &tam);
@@ -14,5 +15,9 @@ int main(int argc, char ** argv){
 					dtotal += dados[i];
 				}
 			}
+				media = dtotal/tam;
+				printf("a media eh %ls", media);
+				
+			
 	return 0;
 }
