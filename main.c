@@ -1,11 +1,13 @@
 #include<stdio.h>
+#include<string.h>
 #include<math.h>
 
-#define coefvar(dpadrao,tam,media) ((sqrt(dpadrao/tam)/media) * 100) 
+double coefvar(double acumulado,int tam,double media) {return sqrt(acumulado/(double)tam)/media * 100;}
+double desvpad(double acumulado,int amostras){return amostras==0 ? 0 : sqrt(acumulado/(double)amostras);};
 int askValor(char * texto){
 	printf("%s\n",texto);
 	int val;
-	scanf("%d",&val);
+	scanf("%d\n",&val);
 	return val;
 };
 int dadosBrutos(double * dados,int tam){
@@ -17,7 +19,11 @@ int dadosBrutos(double * dados,int tam){
 		}
 		return dtotal;
 }
-//double coeficienteVar(double media,double dp,
+void  resultados(double dpadrao,double media,int amostras){
+	printf("A média é: %.2lf\n",media);	
+	printf("O desvio padrão é: %.2lf\n",dpadrao);
+	printf("O Coeficiente de variação é: %.2lf %%\n",coefvar(dpadrao,amostras,media));
+}
 int calcComIntervalo(){
 	int intervalo = askValor("Qual o intervalo?");
 	int menor = askValor("Qual o menor Valor?");
@@ -39,28 +45,39 @@ int calcComIntervalo(){
 		double aux = mediano - media;
 		dpacumula+=aux*aux * pesos[i];
 	}
-	double dpadrao=sqrt(dpacumula/(double)(amostras-1));
-	printf("A média é: %.2lf\n",total/(double)amostras);	
-	printf("O desvio padrão é: %.2lf\n",dpadrao);
-	printf("O Coeficiente de variação é: %.2lf\n",coefvar(dpadrao,amostras,media));
+//	printf("amostras %d dpacumula %lf\n",amostras,dpacumula);
+	double dpadrao=desvpad(dpacumula,amostras);
+	resultados(dpadrao,media,amostras);
 }
 int calcSemIntervalo(){
-	double cv,dpadrao=0;
+	double cv,dpacumula=0;
 	int i,tam = askValor("Quantos valores serão inseridos?");
-			
+	int pesos[tam];	
 	double dados[tam]; 
 	int dtotal=dadosBrutos(dados,tam);//retorna a soma e grava o vetor
-		double media = dtotal/(double)tam;
-		printf("Media: %.2lf\n", media);
-					
-		for(i=0;i<tam;i++){
-			double valor = dados[i]-media;
-			dpadrao += valor*valor;
+	char resp=0;
+		while(resp!='s'&&resp!='n'){
+			printf("Com pesos?<s/n>\n");
+			resp=getchar();
 		}
-		dpadrao = sqrt(dpadrao/(double)(tam-1));
-		printf("Desvio padrao: %.2lf\n",dpadrao);
-		cv = coefvar(dpadrao,tam,media);
-		printf("Coeficiente de variaçao: %.2lf %%\n", cv);
+	int peso=0,amostras=tam;
+	if (resp=='s'){
+			amostras=0;
+			for(i=0;i<tam;i++){
+				printf("Quantos  valores  %.2lf?",dados[i]);
+				pesos[i]=askValor("");
+				amostras+=pesos[i];	
+			}
+		peso=1;
+    }
+	double media = dtotal/(double)amostras;
+		for(i=0;i<tam;i++){
+			double valor = dados[i]-media;	
+			dpacumula += valor*valor * peso==1?pesos[i]:1;
+		}
+	//printf("amostras %d dpacumula %lf\n",amostras,dpacumula);
+	double dpadrao = desvpad(dpacumula,amostras);
+	resultados(dpadrao,media,amostras);
 }
 
 int main(int argc, char ** argv){
@@ -69,7 +86,7 @@ int main(int argc, char ** argv){
 			
 			char resp=0;
 			while(resp!='s'&&resp!='n'){
-				printf("com intervalo?<s/n>\n");
+				printf("Com intervalo?<s/n>\n");
 				resp=getchar();
 			}
 			if(resp=='n')
