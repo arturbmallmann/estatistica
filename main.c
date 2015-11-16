@@ -7,7 +7,7 @@ double desvpad(double acumulado,int amostras){return amostras==0 ? 0 : sqrt(acum
 int askValor(char * texto){
 	printf("%s\n",texto);
 	int val;
-	scanf("%d\n",&val);
+	scanf("%d",&val);
 	return val;
 };
 int dadosBrutos(double * dados,int tam){
