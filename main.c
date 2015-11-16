@@ -1,11 +1,21 @@
 #include<stdio.h>
 #include<math.h>
 int main(int argc, char ** argv){
-	int tam, i;
+	int tam, i,intervalo=0;
 	double media, cv;
+			
+			char resp=0;
+			while(resp!='s'&&resp!='n'){
+				printf("com intervalo?<s/n>\n");
+				resp=getchar();
+			}
+			if(resp=='s'){
+				printf("qual o intervalo");
+				scanf("%d",&intervalo);
+			}
 			printf("Digite quantos dados são:\n");
 			scanf("%d", &tam);
-
+			printf("Valores:\n");
 			double dados[tam], dtotal=0,dpadrao=0;
 			
 				for(i=0;i<tam;i++){
