@@ -18,7 +18,7 @@ int calcComIntervalo(){
 	int i,amostras=0;
 	double mediano,total=0,dpacumula=0;
 	for(i=0;i<tam;i++){
-		printf("Quantos valores entre %d e %d?",menor+i*intervalo,menor+(i+1)*intervalo);	
+		printf("Quantos valores para %d|--%d?",menor+i*intervalo,menor+(i+1)*intervalo);	
 		pesos[i]=askValor("");	
 		mediano=menor + i * intervalo + intervalo/2.0;
 		total+=pesos[i]*mediano;
@@ -33,7 +33,7 @@ int calcComIntervalo(){
 	double dpadrao=sqrt(dpacumula/amostras);
 	printf("A média é: %.2lf\n",total/(double)amostras);	
 	printf("O desvio padrão é: %.2lf\n",dpadrao);
-	printf("O Coeficiente de variação é: %.2lf\n",coefvar(dpadrao,tam,media));
+	printf("O Coeficiente de variação é: %.2lf\n",coefvar(dpadrao,amostras,media));
 }
 int calcSemIntervalo(){
 	double cv,dpadrao=0,dtotal=0;
