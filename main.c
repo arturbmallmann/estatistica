@@ -14,14 +14,14 @@ int calcComIntervalo(){
 	int tam=(maior-menor)/intervalo;
 	int pesos[tam];
 	int i,amostras=0;
-	double total=0;
+	double total=0,dpacumula=0;
 	for(i=0;i<tam;i++){
 		printf("Quantos valores entre %d e %d?",menor+i*intervalo,menor+(i+1)*intervalo);	
 		pesos[i]=askValor("");	
-		total+=pesos[i]*(menor + i*intervalo);	
+		total+=pesos[i]*(menor + i*intervalo + intervalo/(double)2);	
 		amostras+=pesos[i];
 	}
-	printf("A média é: %d\n",total/amostras);	
+	printf("A média é: %.2lf\n",total/(double)amostras);	
 }
 int calcSemIntervalo(){
 	double cv,dpadrao=0,dtotal=0;
