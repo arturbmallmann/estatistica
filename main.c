@@ -27,10 +27,10 @@ int calcComIntervalo(){
 	double media=total/(double)amostras;
 	for(i=0;i<tam;i++){
 		mediano=menor + i * intervalo + intervalo/2.0;
-		int aux = mediano - media;
+		double aux = mediano - media;
 		dpacumula+=aux*aux * pesos[i];
 	}
-	double dpadrao=sqrt(dpacumula/amostras);
+	double dpadrao=sqrt(dpacumula/(double)(amostras-1));
 	printf("A média é: %.2lf\n",total/(double)amostras);	
 	printf("O desvio padrão é: %.2lf\n",dpadrao);
 	printf("O Coeficiente de variação é: %.2lf\n",coefvar(dpadrao,amostras,media));
@@ -49,10 +49,10 @@ int calcSemIntervalo(){
 		printf("Media: %.2lf\n", media);
 					
 		for(i=0;i<tam;i++){
-			int valor = dados[i]-media;
+			double valor = dados[i]-media;
 			dpadrao += valor*valor;
 		}
-		dpadrao = sqrt(dpadrao/tam);
+		dpadrao = sqrt(dpadrao/(double)(tam-1));
 		printf("Desvio padrao: %.2lf\n",dpadrao);
 		cv = coefvar(dpadrao,tam,media);
 		printf("Coeficiente de variaçao: %.2lf %%\n", cv);
