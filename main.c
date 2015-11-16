@@ -6,21 +6,25 @@ int askValor(char * texto){
 	scanf("%d",&val);
 	return val;
 };
+//double coeficienteVar(double media,double dp,
 int calcComIntervalo(){
-	int intervalo = askValor("Qual o intervalo");
+	int intervalo = askValor("Qual o intervalo?");
 	int menor = askValor("Qual o menor Valor?");
 	int maior = askValor("Qual o maior Valor?");
 	int tam=(maior-menor)/intervalo;
 	int pesos[tam];
-	int i,val;
+	int i,amostras=0;
+	double total=0;
 	for(i=0;i<tam;i++){
-		printf("Quantos valores entre %d e %d?",i*intervalo,(i+1)*intervalo);	
+		printf("Quantos valores entre %d e %d?",menor+i*intervalo,menor+(i+1)*intervalo);	
 		pesos[i]=askValor("");	
+		total+=pesos[i]*(menor + i*intervalo);	
+		amostras+=pesos[i];
 	}
-		
+	printf("A média é: %d\n",total/amostras);	
 }
 int calcSemIntervalo(){
-	double cv,dpadrao=0,dtotal;
+	double cv,dpadrao=0,dtotal=0;
 	int i,tam = askValor("Quantos valores serão inseridos?");
 			
 	double dados[tam]; 
