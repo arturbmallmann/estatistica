@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<math.h>
+
+#define coefvar(dpadrao,tam,media) ((sqrt(dpadrao/tam)/media) * 100) 
 int askValor(char * texto){
 	printf("%s\n",texto);
 	int val;
@@ -14,14 +16,24 @@ int calcComIntervalo(){
 	int tam=(maior-menor)/intervalo;
 	int pesos[tam];
 	int i,amostras=0;
-	double total=0,dpacumula=0;
+	double mediano,total=0,dpacumula=0;
 	for(i=0;i<tam;i++){
 		printf("Quantos valores entre %d e %d?",menor+i*intervalo,menor+(i+1)*intervalo);	
 		pesos[i]=askValor("");	
-		total+=pesos[i]*(menor + i*intervalo + intervalo/(double)2);	
+		mediano=menor + i * intervalo + intervalo/2.0;
+		total+=pesos[i]*mediano;
 		amostras+=pesos[i];
 	}
+	double media=total/(double)amostras;
+	for(i=0;i<tam;i++){
+		mediano=menor + i * intervalo + intervalo/2.0;
+		int aux = mediano - media;
+		dpacumula+=aux*aux * pesos[i];
+	}
+	double dpadrao=sqrt(dpacumula/amostras);
 	printf("A média é: %.2lf\n",total/(double)amostras);	
+	printf("O desvio padrão é: %.2lf\n",dpadrao);
+	printf("O Coeficiente de variação é: %.2lf\n",coefvar(dpadrao,tam,media));
 }
 int calcSemIntervalo(){
 	double cv,dpadrao=0,dtotal=0;
@@ -42,7 +54,7 @@ int calcSemIntervalo(){
 		}
 		dpadrao = sqrt(dpadrao/tam);
 		printf("Desvio padrao: %.2lf\n",dpadrao);
-		cv = (sqrt(dpadrao/tam)/media)*100;
+		cv = coefvar(dpadrao,tam,media);
 		printf("Coeficiente de variaçao: %.2lf %%\n", cv);
 }
 
