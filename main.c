@@ -8,6 +8,15 @@ int askValor(char * texto){
 	scanf("%d",&val);
 	return val;
 };
+int dadosBrutos(double * dados,int tam){
+		int i,dtotal=0;
+		printf("insira os valores:\n");
+		for(i=0;i<tam;i++){
+			scanf("%lf", &dados[i]);
+			dtotal += dados[i];
+		}
+		return dtotal;
+}
 //double coeficienteVar(double media,double dp,
 int calcComIntervalo(){
 	int intervalo = askValor("Qual o intervalo?");
@@ -36,15 +45,11 @@ int calcComIntervalo(){
 	printf("O Coeficiente de variação é: %.2lf\n",coefvar(dpadrao,amostras,media));
 }
 int calcSemIntervalo(){
-	double cv,dpadrao=0,dtotal=0;
+	double cv,dpadrao=0;
 	int i,tam = askValor("Quantos valores serão inseridos?");
 			
 	double dados[tam]; 
-		for(i=0;i<tam;i++){
-			scanf("%lf", &dados[i]);
-			dtotal += dados[i];
-		}
-
+	int dtotal=dadosBrutos(dados,tam);//retorna a soma e grava o vetor
 		double media = dtotal/(double)tam;
 		printf("Media: %.2lf\n", media);
 					
